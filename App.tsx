@@ -1,118 +1,75 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from './src/views/Home/index';
+import Strolling from './src/views/Strolling/index';
+import Service from './src/views/Service/index';
+import HuazhuAccount from './src/views/HuazhuAccount/index';
+import Mine from './src/views/Mine/index';
+import CustomBottomTabBar from './src/components/CustomBottomTabBar';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                initialRouteName="Home"
+                screenOptions={({ route }) => {
+                    const isCircle = ['Service'].includes(route.name);
+                    const tabBarItemStyle = isCircle ? {} : {};
+                    return {
+                        headerShown: false, //是否显示标题
+                        tabBarActiveTintColor: isCircle ? '#fff' : '#5A3D91', //选中时tab颜色
+                        tabBarInactiveTintColor: '#747474', //默认颜色
+                        tabBarActiveBackgroundColor: isCircle ? '#5A3D91' : '#fff',
+                        tabBarLabelStyle: {
+                            fontSize: 10,
+                            marginTop: -5,
+                            marginBottom: 3
+                        },
+                        tabBarItemStyle: {
+                            ...tabBarItemStyle
+                        }
+                    };
+                }}
+                tabBar={props => <CustomBottomTabBar {...props} />}
+            >
+                <Tab.Screen name="Home" component={Home} options={{ tabBarLabel: '首页' }} />
+                <Tab.Screen
+                    name="Strolling"
+                    component={Strolling}
+                    options={{
+                        tabBarLabel: '逛逛'
+                    }}
+                />
+                <Tab.Screen
+                    name="Service"
+                    component={Service}
+                    options={{
+                        tabBarLabel: '服务'
+                    }}
+                />
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+                <Tab.Screen
+                    name="HuazhuAccount"
+                    component={HuazhuAccount}
+                    options={{
+                        tabBarLabel: '华住号'
+                    }}
+                />
+                <Tab.Screen
+                    name="Mine"
+                    component={Mine}
+                    options={{
+                        tabBarLabel: '会员'
+                    }}
+                />
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

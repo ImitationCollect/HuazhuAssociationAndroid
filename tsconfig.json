@@ -18,6 +18,6 @@
       },
       "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", ".env.d.ts", "main-app.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx", ".env.d.ts", "main-app.d.ts","typed-css.d.ts"],
   "exclude": ["node_modules"]
 }
