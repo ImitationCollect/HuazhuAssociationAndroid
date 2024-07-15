@@ -35,7 +35,7 @@ function App(): React.JSX.Element {
                         }
                     };
                 }}
-                tabBar={props => <CustomBottomTabBar {...props} />}
+                tabBar={props => <CustomBottomTabBar position='' {...props} />}
             >
                 <Tab.Screen name="Home" component={Home} options={{ tabBarLabel: '首页' }} />
                 <Tab.Screen
