@@ -22,38 +22,51 @@ export { default as IconBiaoqiankuozhanWode395Copy } from './IconBiaoqiankuozhan
 export { default as IconShouye } from './IconShouye';
 export { default as IconATuandui2 } from './IconATuandui2';
 export { default as IconATuandui2Copy } from './IconATuandui2Copy';
+import { default as IconDaBanYuan } from './IconDaBanYuan';
 
-export type IconNames = 'a-048_pengyouquan' | 'a-048_pengyouquan-copy' | 'biaoqiankuozhan_wode-395' | 'bianqian' | 'bianqian-copy' | 'biaoqiankuozhan_wode-395-copy' | 'shouye' | 'a-tuandui2' | 'a-tuandui2-copy';
+export type IconNames =
+    | 'a-048_pengyouquan'
+    | 'a-048_pengyouquan-copy'
+    | 'biaoqiankuozhan_wode-395'
+    | 'bianqian'
+    | 'bianqian-copy'
+    | 'biaoqiankuozhan_wode-395-copy'
+    | 'shouye'
+    | 'a-tuandui2'
+    | 'a-tuandui2-copy'
+    | 'dabanyuan';
 
 interface Props extends GProps, ViewProps {
-  name: IconNames;
-  size?: number;
-  color?: string | string[];
+    name: IconNames;
+    size?: number;
+    color?: string | string[];
 }
 
 let IconFont: FunctionComponent<Props> = ({ name, ...rest }) => {
-  switch (name) {
-    case 'a-048_pengyouquan':
-      return <IconA048Pengyouquan key="1" {...rest} />;
-    case 'a-048_pengyouquan-copy':
-      return <IconA048PengyouquanCopy key="2" {...rest} />;
-    case 'biaoqiankuozhan_wode-395':
-      return <IconBiaoqiankuozhanWode395 key="3" {...rest} />;
-    case 'bianqian':
-      return <IconBianqian key="4" {...rest} />;
-    case 'bianqian-copy':
-      return <IconBianqianCopy key="5" {...rest} />;
-    case 'biaoqiankuozhan_wode-395-copy':
-      return <IconBiaoqiankuozhanWode395Copy key="6" {...rest} />;
-    case 'shouye':
-      return <IconShouye key="7" {...rest} />;
-    case 'a-tuandui2':
-      return <IconATuandui2 key="8" {...rest} />;
-    case 'a-tuandui2-copy':
-      return <IconATuandui2Copy key="9" {...rest} />;
-  }
+    switch (name) {
+        case 'a-048_pengyouquan':
+            return <IconA048Pengyouquan key="1" {...rest} />;
+        case 'a-048_pengyouquan-copy':
+            return <IconA048PengyouquanCopy key="2" {...rest} />;
+        case 'biaoqiankuozhan_wode-395':
+            return <IconBiaoqiankuozhanWode395 key="3" {...rest} />;
+        case 'bianqian':
+            return <IconBianqian key="4" {...rest} />;
+        case 'bianqian-copy':
+            return <IconBianqianCopy key="5" {...rest} />;
+        case 'biaoqiankuozhan_wode-395-copy':
+            return <IconBiaoqiankuozhanWode395Copy key="6" {...rest} />;
+        case 'shouye':
+            return <IconShouye key="7" {...rest} />;
+        case 'a-tuandui2':
+            return <IconATuandui2 key="8" {...rest} />;
+        case 'a-tuandui2-copy':
+            return <IconATuandui2Copy key="9" {...rest} />;
+        case 'dabanyuan':
+            return <IconDaBanYuan key="10" {...rest} />;
+    }
 
-  return null;
+    return null;
 };
 
 IconFont = React.memo ? React.memo(IconFont) : IconFont;

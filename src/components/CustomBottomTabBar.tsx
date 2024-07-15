@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native';
 import IconFont from './iconfont';
-// import { Surface, Shape, Path } from '@react-native-community/art';
 
 const tabBarIconMap = {
     Home: {
@@ -66,15 +65,13 @@ function CustomBottomTabBar({ state, descriptors, navigation, position }) {
                     </>
                 );
 
-                // const path = new Path().moveTo(50, 1).arc(0, 99, 25).arc(0, -99, 25).close();
-
                 return (
                     <TouchableOpacity accessibilityRole="button" onPress={onPress} activeOpacity={1} style={styles.tabBarItem}>
                         {index == 2 ? (
                             <View style={styles.tabBarHeightItem}>
-                                {/* <Surface width={100} height={100}>
-                                    <Shape d={path} stroke="#000000" strokeWidth={1} />
-                                </Surface> */}
+                                <View style={styles.tabBarHeightArc}>
+                                    <IconFont name="dabanyuan" size={48} color="rgba(0, 0, 0, 0.025)" style={styles.tabBarHeightArcIcon}></IconFont>
+                                </View>
                                 <View style={[styles.tabBarHeightItemCircle, { backgroundColor: isFocused ? '#5A3D91' : '#fff' }]}>{tabBarContent}</View>
                             </View>
                         ) : (
@@ -113,10 +110,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff',
-        height: 52,
+        height: 50,
         width: 50,
-        borderTopLeftRadius: 22,
-        borderTopRightRadius: 22
+        borderRadius: 50,
+        position: 'relative',
     },
     tabBarHeightItemCircle: {
         flexDirection: 'column',
@@ -125,5 +122,22 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 50
+    },
+    tabBarHeightArc: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        position: 'absolute',
+        top: -5,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+        
+    },
+
+    tabBarHeightArcIcon: {
+        backgroundColor: '#fff',
+        borderRadius: 50,
     }
 });
