@@ -25,12 +25,12 @@ const tabBarIconMap = {
     }
 };
 
-const getTabBarIcon = ({ color, focused, routeName, index }) => {
-    const iconName: any = focused ? tabBarIconMap[routeName]['focused'] : tabBarIconMap[routeName]['unfocused'];
-    return <IconFont name={iconName} color={focused ? (index == 2 ? '#fff' : color) : '#292929'} size={20} />;
-};
+function CustomBottomTabBar({ state, descriptors, navigation }) {
+    const getTabBarIcon = ({ color, focused, routeName, index }) => {
+        const iconName: any = focused ? tabBarIconMap[routeName]['focused'] : tabBarIconMap[routeName]['unfocused'];
+        return <IconFont name={iconName} color={focused ? (index == 2 ? '#fff' : color) : '#292929'} size={20} />;
+    };
 
-function CustomBottomTabBar({ state, descriptors, navigation, position }) {
     return (
         <View style={styles.customBottomTabBar}>
             {state.routes.map((route, index) => {
@@ -66,7 +66,7 @@ function CustomBottomTabBar({ state, descriptors, navigation, position }) {
                 );
 
                 return (
-                    <TouchableOpacity accessibilityRole="button" onPress={onPress} activeOpacity={1} style={styles.tabBarItem}>
+                    <TouchableOpacity accessibilityRole="button" onPress={onPress} activeOpacity={1} style={styles.tabBarItem} key={index}>
                         {index == 2 ? (
                             <View style={styles.tabBarHeightItem}>
                                 <View style={styles.tabBarHeightArc}>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         borderRadius: 50,
-        position: 'relative',
+        position: 'relative'
     },
     tabBarHeightItemCircle: {
         flexDirection: 'column',
@@ -132,12 +132,11 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: -1,
-        
+        zIndex: -1
     },
 
     tabBarHeightArcIcon: {
         backgroundColor: '#fff',
-        borderRadius: 50,
+        borderRadius: 50
     }
 });
