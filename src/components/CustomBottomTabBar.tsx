@@ -26,11 +26,6 @@ const tabBarIconMap = {
 };
 
 function CustomBottomTabBar({ state, descriptors, navigation }) {
-    const getTabBarIcon = ({ color, focused, routeName, index }) => {
-        const iconName: any = focused ? tabBarIconMap[routeName]['focused'] : tabBarIconMap[routeName]['unfocused'];
-        return <IconFont name={iconName} color={focused ? (index == 2 ? '#fff' : color) : '#292929'} size={20} />;
-    };
-
     return (
         <View style={styles.customBottomTabBar}>
             {state.routes.map((route, index) => {
@@ -38,6 +33,7 @@ function CustomBottomTabBar({ state, descriptors, navigation }) {
                 const isFocused = state.index === index;
                 const { tabBarLabel, title } = options || {};
                 const label = tabBarLabel || title || route.name;
+                const isHeight = index == 2;
 
                 const onPress = () => {
                     const event = navigation.emit({
@@ -51,13 +47,18 @@ function CustomBottomTabBar({ state, descriptors, navigation }) {
                     }
                 };
 
+                const getTabBarIcon = ({ color, focused, routeName, index }) => {
+                    const iconName: any = focused ? tabBarIconMap[routeName]['focused'] : tabBarIconMap[routeName]['unfocused'];
+                    return <IconFont name={iconName} color={focused ? (isHeight ? '#fff' : color) : '#292929'} size={22} />;
+                };
+
                 const tabBarContent = (
                     <>
                         {getTabBarIcon({ color: '#5A3D91', focused: isFocused, routeName: route.name, index })}
                         <Text
                             style={{
                                 fontSize: 10,
-                                color: isFocused ? (index == 2 ? '#fff' : '#5A3D91') : '#737276'
+                                color: isFocused ? (isHeight ? '#fff' : '#5A3D91') : '#737276'
                             }}
                         >
                             {label}
@@ -66,13 +67,12 @@ function CustomBottomTabBar({ state, descriptors, navigation }) {
                 );
 
                 return (
-                    <TouchableOpacity accessibilityRole="button" onPress={onPress} activeOpacity={1} style={styles.tabBarItem} key={index}>
-                        {index == 2 ? (
+                    <TouchableOpacity accessibilityRole="button" onPress={onPress} activeOpacity={1} style={[styles.tabBarItem]} key={index}>
+                        {isHeight ? (
                             <View style={styles.tabBarHeightItem}>
-                                <View style={styles.tabBarHeightArc}>
-                                    <IconFont name="dabanyuan" size={48} color="rgba(0, 0, 0, 0.025)" style={styles.tabBarHeightArcIcon}></IconFont>
+                                <View style={[styles.tabBarHeightItemContent, { paddingTop: isFocused ? 0 : 3 }]}>
+                                    {isFocused ? <View style={styles.tabBarHeightActive}>{tabBarContent}</View> : tabBarContent}
                                 </View>
-                                <View style={[styles.tabBarHeightItemCircle, { backgroundColor: isFocused ? '#5A3D91' : '#fff' }]}>{tabBarContent}</View>
                             </View>
                         ) : (
                             tabBarContent
@@ -91,13 +91,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        height: 42,
+        height: 45,
         paddingTop: 5,
         backgroundColor: '#fff',
         shadowColor: 'rgba(0, 0, 0, 1)',
         shadowOpacity: 0.9,
         shadowRadius: 10, //阴影模糊半径
-        elevation: 15
+        elevation: 15,
+        position: 'relative'
     },
     tabBarItem: {
         flexDirection: 'column',
@@ -106,37 +107,41 @@ const styles = StyleSheet.create({
         flex: 1
     },
     tabBarHeightItem: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fff',
         height: 50,
         width: 50,
-        borderRadius: 50,
-        position: 'relative'
+        borderRadius: 25,
+        backgroundColor: '#fff',
+        position: 'absolute',
+        left: '50%',
+        marginLeft: -25,
+        top: -33,
+        borderTopWidth: 0.5,
+        borderRightWidth: 0.5,
+        borderLeftWidth: 0.5,
+        borderColor: 'rgba(0, 0, 0, 0.05)',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
-    tabBarHeightItemCircle: {
+    tabBarHeightItemContent: {
+        height: 45,
+        width: 50,
+        backgroundColor: '#fff',
+        marginTop: 8,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 40,
-        height: 40,
-        borderRadius: 50
+        position: 'relative'
     },
-    tabBarHeightArc: {
+    tabBarHeightActive: {
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        position: 'absolute',
-        top: -5,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1
-    },
-
-    tabBarHeightArcIcon: {
-        backgroundColor: '#fff',
-        borderRadius: 50
+        justifyContent: 'center',
+        backgroundColor: '#5A3D91',
+        height: 40,
+        width: 40,
+        borderRadius: 50,
+        top: 0,
+        position: 'absolute'
     }
 });
