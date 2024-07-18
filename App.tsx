@@ -33,19 +33,19 @@ function App(): React.JSX.Element {
                     }}
                     tabBar={props => <CustomBottomTabBar {...props} />}
                 >
-                    <Tab.Screen name="Home" component={Home} options={{ tabBarLabel: '首页' }} />
+                    <Tab.Screen name="Home" component={Home} options={{ tabBarLabel: 'Accounts' }} />
                     <Tab.Screen
                         name="Strolling"
                         component={Strolling}
                         options={{
-                            tabBarLabel: '逛逛'
+                            tabBarLabel: 'Cards'
                         }}
                     />
                     <Tab.Screen
                         name="Service"
                         component={Service}
                         options={{
-                            tabBarLabel: '服务'
+                            tabBarLabel: ' '
                         }}
                     />
 
@@ -53,14 +53,14 @@ function App(): React.JSX.Element {
                         name="HuazhuAccount"
                         component={HuazhuAccount}
                         options={{
-                            tabBarLabel: '华住号'
+                            tabBarLabel: 'Notifications'
                         }}
                     />
                     <Tab.Screen
                         name="Mine"
                         component={Mine}
                         options={{
-                            tabBarLabel: '会员'
+                            tabBarLabel: 'Mine'
                         }}
                     />
                 </Tab.Navigator>

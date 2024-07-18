@@ -11,6 +11,7 @@ function Mine() {
     return (
         <ScrollView>
             <Text>mine Screen</Text>
+            <Button title="切换" onPress={() => dispatch(setTheme('dark'))}></Button>
         </ScrollView>
     );
 }
