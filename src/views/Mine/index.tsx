@@ -1,12 +1,18 @@
 import React from 'react';
-import {StyleSheet, Text, useColorScheme, View, ScrollView} from 'react-native';
+import { StyleSheet, Text, useColorScheme, View, ScrollView, Button } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { store } from '@/store';
+import { setTheme } from '@/store/reducer/common';
+import type { RootState } from '@/store';
 
 function Mine() {
-  return (
-    <ScrollView>
-      <Text>mine Screen</Text>
-    </ScrollView>
-  );
+    const dispatch = useDispatch();
+    const theme = useSelector((state: RootState) => state.common.theme);
+    return (
+        <ScrollView>
+            <Text>mine Screen</Text>
+        </ScrollView>
+    );
 }
 
 export default Mine;

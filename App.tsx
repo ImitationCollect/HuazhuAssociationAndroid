@@ -8,6 +8,8 @@ import HuazhuAccount from './src/views/HuazhuAccount/index';
 import Mine from './src/views/Mine/index';
 import CustomBottomTabBar from './src/components/CustomBottomTabBar';
 import { StatusBar, useColorScheme } from 'react-native';
+import { store } from './src/store';
+import { Provider } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +17,7 @@ function App(): React.JSX.Element {
     const colorScheme = useColorScheme();
 
     return (
-        <>
+        <Provider store={store}>
             <StatusBar
                 translucent={true}
                 backgroundColor="transparent"
@@ -63,7 +65,7 @@ function App(): React.JSX.Element {
                     />
                 </Tab.Navigator>
             </NavigationContainer>
-        </>
+        </Provider>
     );
 }
 
